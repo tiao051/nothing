@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi lời chúc 💝</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap');
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #FFB6D9, #D147A3, #FFCCCB, #FFC0CB);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(255,105,180,0.3);
+            border: 2px solid rgba(255,105,180,0.2);
+            max-width: 400px;
+        }
+        .card h3 {
+            color: #FF1493;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .card p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background: linear-gradient(45deg, #FF69B4, #FF1493);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,105,180,0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,105,180,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h3>💝 Gửi lời chúc</h3>
+        <p>Gửi những lời chúc ngọt ngào cùng My Melody!</p>
+        <button class="btn" onclick="sendWish()">Gửi lời chúc 💕</button>
+    </div>
+
+    <script>
+        function sendWish() {
+            const wishes = [
+                "Chúc bạn một ngày tràn đầy niềm vui! 💕",
+                "Mong bạn luôn hạnh phúc như My Melody! 🌸",
+                "Gửi bạn những điều ngọt ngào nhất! 🍓",
+                "Chúc bạn may mắn và thành công! ⭐",
+                "Hy vọng nụ cười luôn nở trên môi bạn! 😊"
+            ];
+            const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
+            alert(`My Melody gửi tới bạn:\n\n${randomWish}`);
+        }
+    </script>
+</body>
+</html>
