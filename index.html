@@ -1,77 +1,449 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gửi lời chúc 💝</title>
+    <title>How was your day?</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #FFB6D9, #D147A3, #FFCCCB, #FFC0CB);
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 50%, #f8e8ff 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
+            position: relative;
         }
-        .card {
-            background: rgba(255,255,255,0.95);
-            border-radius: 25px;
-            padding: 30px;
+
+        /* My Melody decorations */
+        .my-melody-left {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            width: 80px;
+            height: 100px;
+            opacity: 0.15;
+        }
+
+        .my-melody-right {
+            position: absolute;
+            bottom: 10%;
+            right: 5%;
+            width: 60px;
+            height: 75px;
+            opacity: 0.15;
+        }
+
+        .melody-head {
+            background: white;
+            border-radius: 50%;
+            position: relative;
+            border: 2px solid #ffb6c1;
+        }
+
+        .melody-ears {
+            position: absolute;
+            top: -25%;
+        }
+
+        .melody-ear {
+            background: #ffb6c1;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .melody-ear.left {
+            width: 25px;
+            height: 40px;
+            left: 10%;
+            transform: rotate(-20deg);
+        }
+
+        .melody-ear.right {
+            width: 25px;
+            height: 40px;
+            right: 10%;
+            transform: rotate(20deg);
+        }
+
+        .melody-face {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .melody-eyes {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .melody-eye {
+            width: 3px;
+            height: 3px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        .melody-nose {
+            width: 2px;
+            height: 2px;
+            background: #ffb6c1;
+            border-radius: 50%;
+            margin: 0 auto 3px;
+        }
+
+        .container {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.2);
+            max-width: 450px;
+            width: 100%;
+            border: 2px solid #f8bbd9;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
             text-align: center;
-            box-shadow: 0 8px 32px rgba(255,105,180,0.3);
-            border: 2px solid rgba(255,105,180,0.2);
-            max-width: 400px;
+            margin-bottom: 30px;
         }
-        .card h3 {
-            color: #FF1493;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            font-weight: 700;
+
+        .title {
+            color: #d63384;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
-        .card p {
-            color: #666;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
+
+        .subtitle {
+            color: #8e44ad;
+            font-size: 14px;
+            font-weight: 400;
+            opacity: 0.8;
         }
-        .btn {
-            background: linear-gradient(45deg, #FF69B4, #FF1493);
+
+        .question-group {
+            margin-bottom: 25px;
+        }
+
+        .question {
+            color: #6f42c1;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .radio-option {
+            position: relative;
+        }
+
+        .radio-option input[type="radio"] {
+            opacity: 0;
+            position: absolute;
+        }
+
+        .radio-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 24px;
+            background: #fce4ec;
+            border: 2px solid #f8bbd9;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #8e24aa;
+            min-width: 90px;
+            font-size: 15px;
+        }
+
+        .radio-option input[type="radio"]:checked + label {
+            background: #e1bee7;
+            border-color: #ba68c8;
+            transform: scale(1.03);
+            box-shadow: 0 4px 12px rgba(186, 104, 200, 0.25);
+        }
+
+        .follow-up {
+            display: none;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .follow-up.show {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #f8bbd9;
+            border-radius: 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            color: #6f42c1;
+            background: #fef7ff;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 90px;
+            line-height: 1.5;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #ba68c8;
+            box-shadow: 0 0 8px rgba(186, 104, 200, 0.15);
+        }
+
+        .text-input::placeholder {
+            color: #ce93d8;
+            font-style: normal;
+            opacity: 0.7;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
             color: white;
             border: none;
-            padding: 15px 30px;
             border-radius: 25px;
-            font-size: 1.1rem;
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255,105,180,0.3);
+            margin-top: 25px;
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.25);
+            letter-spacing: 0.3px;
         }
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255,105,180,0.5);
+
+        .submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(233, 30, 99, 0.35);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .result {
+            display: none;
+            text-align: center;
+            padding: 25px;
+            background: #f3e5f5;
+            border-radius: 15px;
+            margin-top: 25px;
+            border: 2px solid #ce93d8;
+        }
+
+        .result.show {
+            display: block;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .result h3 {
+            color: #8e24aa;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .result p {
+            color: #6f42c1;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+                margin: 10px;
+            }
+            
+            .title {
+                font-size: 22px;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .my-melody-left, .my-melody-right {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h3>💝 Gửi lời chúc</h3>
-        <p>Gửi những lời chúc ngọt ngào cùng My Melody!</p>
-        <button class="btn" onclick="sendWish()">Gửi lời chúc 💕</button>
+    <!-- My Melody decorations -->
+    <div class="my-melody-left">
+        <div class="melody-head" style="width: 80px; height: 80px;">
+            <div class="melody-ears">
+                <div class="melody-ear left"></div>
+                <div class="melody-ear right"></div>
+            </div>
+            <div class="melody-face">
+                <div class="melody-eyes">
+                    <div class="melody-eye"></div>
+                    <div class="melody-eye"></div>
+                </div>
+                <div class="melody-nose"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="my-melody-right">
+        <div class="melody-head" style="width: 60px; height: 60px;">
+            <div class="melody-ears">
+                <div class="melody-ear left" style="width: 18px; height: 30px;"></div>
+                <div class="melody-ear right" style="width: 18px; height: 30px;"></div>
+            </div>
+            <div class="melody-face">
+                <div class="melody-eyes">
+                    <div class="melody-eye"></div>
+                    <div class="melody-eye"></div>
+                </div>
+                <div class="melody-nose"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="title">How was your day out?</h1>
+            <p class="subtitle">Share your experience with nmt</p>
+        </div>
+
+        <form id="surveyForm">
+            <div class="question-group">
+                <div class="question">Did Thanh Nghi have fun today?</div>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="yes" name="mood" value="yes">
+                        <label for="yes">Yes</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="no" name="mood" value="no">
+                        <label for="no">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="followUpYes" class="follow-up">
+                <div class="question">What made it fun?</div>
+                <textarea class="text-input" name="happyDetails" placeholder="Tell us about the highlights of your day..."></textarea>
+                
+                <div class="question" style="margin-top: 25px;">When should we meet up next?</div>
+                <textarea class="text-input" name="nextMeeting" placeholder="Maybe this weekend? Or whenever you're free..."></textarea>
+            </div>
+
+            <div id="followUpNo" class="follow-up">
+                <div class="question">What didn't go well?</div>
+                <textarea class="text-input" name="sadDetails" placeholder="Share what happened so we can make it better next time..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Response</button>
+        </form>
+
+        <div id="result" class="result">
+            <h3>Thank you for sharing!</h3>
+            <p>Your response has been received. Hope tomorrow brings even better moments!</p>
+        </div>
     </div>
 
     <script>
-        function sendWish() {
-            const wishes = [
-                "Chúc bạn một ngày tràn đầy niềm vui! 💕",
-                "Mong bạn luôn hạnh phúc như My Melody! 🌸",
-                "Gửi bạn những điều ngọt ngào nhất! 🍓",
-                "Chúc bạn may mắn và thành công! ⭐",
-                "Hy vọng nụ cười luôn nở trên môi bạn! 😊"
-            ];
-            const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
-            alert(`My Melody gửi tới bạn:\n\n${randomWish}`);
-        }
+        const form = document.getElementById('surveyForm');
+        const moodRadios = document.querySelectorAll('input[name="mood"]');
+        const followUpYes = document.getElementById('followUpYes');
+        const followUpNo = document.getElementById('followUpNo');
+        const result = document.getElementById('result');
+
+        // Handle radio button changes
+        moodRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Hide all follow-ups first
+                followUpYes.classList.remove('show');
+                followUpNo.classList.remove('show');
+                
+                // Show appropriate follow-up
+                setTimeout(() => {
+                    if (this.value === 'yes') {
+                        followUpYes.classList.add('show');
+                    } else {
+                        followUpNo.classList.add('show');
+                    }
+                }, 100);
+            });
+        });
+
+        // Handle form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const mood = formData.get('mood');
+            
+            if (!mood) {
+                alert('Please select an answer first!');
+                return;
+            }
+
+            // Simulate processing
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                form.style.display = 'none';
+                result.classList.add('show');
+                
+                // Reset form for next use
+                setTimeout(() => {
+                    form.reset();
+                    form.style.display = 'block';
+                    result.classList.remove('show');
+                    followUpYes.classList.remove('show');
+                    followUpNo.classList.remove('show');
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 3000);
+            }, 1500);
+        });
     </script>
 </body>
 </html>
